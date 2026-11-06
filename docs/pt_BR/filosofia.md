@@ -80,7 +80,7 @@
 
 ## 13. Como cada repo cita este texto
 
-- O manifesto da Autonomia Tecnológica mora no site (`site/i18n/pt_BR.json`), que é a fonte primária dele; este texto o cita e não o repete.
+- O manifesto da Autonomia Tecnológica mora no site (`site/i18n/pt_BR.json`, chave `pages.manifesto.points`), que é a fonte primária dele; este texto o cita e não o repete.
 - Cada repo cita este texto numa linha (README ou documento fundador) e não o repete.
 - Regra que nasce num repo e vale para os outros sobe para cá.
 - Repo que precisa contrariar uma regra daqui diz a contradição e o porquê; nunca em silêncio.
