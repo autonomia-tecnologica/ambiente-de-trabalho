@@ -51,7 +51,7 @@
 
 - O público principal é a LLM: o texto é direto, em tópicos, e pode ser gerado ou revisado por LLM.
 - Humanos podem ler, mas não são a medida de forma nem de estilo aqui.
-- Quem gera ou altera este texto preserva as decisões do Rafael; na dúvida, pergunta.
+- Quem gera ou altera este texto preserva as decisões do autor; na dúvida, pergunta.
 
 ## 8. A pessoa decide
 
@@ -73,7 +73,7 @@
 
 ## 11. Para quem
 
-- Para o Rafael primeiro: pensado para o uso dele, honesto sobre o que serve.
+- Para o autor primeiro: pensado para o uso dele, honesto sobre o que serve. Quem usa o ambiente é "a pessoa"; o autor é quem o criou.
 - Aberto a quem não programa depois.
 - pt-BR primeiro.
 
