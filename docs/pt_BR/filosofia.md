@@ -12,15 +12,19 @@
 ## 2. O que une a tríade
 
 - **AT**: o core, o motor de tarefas, o "sistema operacional da pessoa".
-- **Produtividade**: a home da pessoa, a Pasta de Trabalho com os dados dela.
+- **home**: a Pasta de Trabalho da pessoa, com os dados e as regras dela.
 - **ai-tmux-workspace**: onde se constrói: repositórios, aplicações, código determinístico.
 - Os três seguem este texto; cada um cita, nenhum repete.
+- São dois planos: o de **uso** (AT, o que roda todo dia) e o de **construção** (ai-tmux-workspace, onde a LLM escreve código). A home é a ponte entre os dois.
 
 ## 3. Core único e interfaces
 
 - Um core só, o AT: nele moram as regras, os dados e as decisões.
 - WebApp, `cli` e plugin tmux são interfaces, cada uma com suas particularidades.
 - Interface pede ao core; não guarda uma segunda verdade nem decide sozinha.
+- Uma ação existe uma vez, declarada no core; cada interface só a apresenta.
+- O ai-tmux-workspace é cliente do AT: lê e escreve por `at-cli --json`. O AT nunca sabe de tmux.
+- O AT absorve conceitos do plano de construção (fila de trabalho, agente como ator, aprovação), nunca a tela nem o agente.
 - O site compartilha identidade e filosofia, mas não fala com o AT.
 
 ## 4. Segurança
