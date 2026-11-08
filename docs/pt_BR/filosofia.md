@@ -32,6 +32,7 @@
 - Segurança é premissa, não opcional: o padrão é o seguro.
 - Menos seguro é escolha informada, com o preço dito antes; quem escolhe é a pessoa.
 - Menor privilégio para pessoa, programa e agente; rastro de toda ação; segredo nunca em claro.
+- Comando privilegiado (root, sudo, instalação, alteração de sistema) nunca é executado por LLM por conta própria: o agente diz que pode executar, mostra o comando e espera a confirmação explícita da pessoa. Só então roda, pedindo a senha administrativa pelo mecanismo do sistema (no Linux, `pkexec`), de modo que a pessoa saiba o que está autorizando na máquina dela.
 - O que não se mede se declara, em vez de virar promessa.
 
 ## 5. Dados da pessoa
