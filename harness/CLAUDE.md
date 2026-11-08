@@ -37,6 +37,7 @@ Antes de mexer em backlog ou commit, ler a regra correspondente.
 - Fechar a fatia é da sessão que despachou: confere a validação, tira o item do backlog e commita.
 - Revisão profunda só quando a pessoa pedir.
 - Worktree não é sandbox. Quem cria, remove, e só o que criou.
+- Sessão principal sempre em `accept edits`; modo automático só em subagente delimitado. Permissão é de um comando concreto, nunca de um guarda-chuva como `Bash` ou um interpretador inteiro.
 
 ## Commits (`regras/commits.md`)
 

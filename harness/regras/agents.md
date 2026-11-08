@@ -10,6 +10,12 @@ Papéis, despacho, worktrees e custo.
 - Fechar é da sessão que despachou: confere a validação, tira o item do `BACKLOG.md` e commita.
 - Revisão profunda só quando a pessoa pedir, nunca por fatia.
 
+## Permissões
+
+- A sessão principal fica sempre em modo de aceitar edições (`accept edits`); o modo automático é bom, mas perigoso, e não roda nela.
+- Ação que não pode ser monitorada roda em subagente delimitado, com escopo fechado.
+- Permissão se concede a um comando concreto por vez, nunca a um guarda-chuva que libera outros comandos (como liberar `Bash` ou um interpretador inteiro — `python`, `sh`). Se o comando é guarda-chuva, a ação vai para o subagente em modo automático.
+
 ## Despacho
 
 A pessoa diz o modo; a sessão não adivinha.
