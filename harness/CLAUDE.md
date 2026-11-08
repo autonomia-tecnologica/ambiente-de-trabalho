@@ -46,7 +46,7 @@ Antes de mexer em backlog ou commit, ler a regra correspondente.
 
 ## Segredos (`regras/secrets.md`)
 
-- Segredo em claro não fica na pasta de trabalho, nem ignorado pelo git. Entra por canal seguro, nunca colado no chat, em argumento de linha de comando ou em arquivo em claro.
+- Segredo em claro não fica na pasta de trabalho, nem ignorado pelo git. Entra por canal seguro, nunca colado no chat, em argumento de linha de comando ou em arquivo em claro. Chave de acesso (API, token de provedor) nunca vive dentro do ambiente, nem nas settings que o workspace gerencia: elas só apontam para onde a chave está.
 
 ## Harness (`regras/harness.md`)
 

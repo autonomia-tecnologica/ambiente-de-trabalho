@@ -77,3 +77,15 @@ itens:
     alvo: "Write|Edit|NotebookEdit"
     acao: "hoje: negar a escrita até o harness ser lido na sessão; decisão: fica como lembrete (ver ORIGEM.md, D1)"
     falha: "abrir (erro não bloqueia)"
+
+  - id: F08
+    regra: "Chave de acesso nunca vive dentro do ambiente"
+    texto: regras/secrets.md
+    tipo: check
+    alvo: "settings geradas ou gerenciadas pelo workspace, e arquivos do repo"
+    padrao:
+      - "ANTHROPIC_AUTH_TOKEN com valor literal"
+      - "*_API_KEY com valor literal"
+    evento: "antes de gravar settings e antes de commit"
+    falha: "reprovar se houver valor literal de chave (apontar para o cofre em vez disso)"
+    status: decidida

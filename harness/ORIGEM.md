@@ -124,3 +124,4 @@ Situações:
 - **D4. Idioma.** Texto de regra em pt-BR, que é o idioma da pessoa. Nomes de arquivo em inglês quando isso faz sentido; a pasta `regras/` segue o nome pedido.
 - **D5. Quem usa é "a pessoa".** Nenhuma regra deste repositório nomeia quem a escreveu nem traz dado pessoal dele.
 - **D6. Itens forçados decididos.** F03 (`sudo` negado, pkexec no lugar) e F05 (segredo em claro fora do repo, com exceção para modelos `.example`) foram confirmados pela pessoa e marcados `status: decidida` em `forcado.yaml`.
+- **D7. Chave de acesso nunca vive dentro do ambiente, decidido pela pessoa.** O workspace pode gerar e gerenciar as settings do agente para a pessoa, exceto as chaves (API, token de provedor): essas nunca moram no ambiente, e as settings só apontam para onde estão. Regra em `regras/secrets.md` e `forcado.yaml` (F08).
