@@ -1,0 +1,79 @@
+# Harness forçado: lista declarativa do que deve virar bloqueio de hook ou deny.
+#
+# Não é código e não é executado. A implementação (hook, permissão, configuração
+# de ferramenta) fica fora deste repositório. Item com "status: decidida" foi
+# confirmado pela pessoa. Campos marcados "(proposto)" são sugestão para quem
+# implementar, não decisão tomada.
+#
+# tipo:
+#   hook      bloqueia ou age num evento da ferramenta
+#   deny      nega uma ação por padrão de ferramenta e alvo
+#   check     reprova um arquivo ou estado numa conferência
+#   lembrete  só lembra; não é segurança
+versao: 1
+itens:
+  - id: F01
+    regra: "Scan de segredos antes de todo commit"
+    texto: regras/commits.md
+    tipo: hook
+    evento: "antes de commit"
+    acao: "rodar o scan de segredos do repo e bloquear se achar algo ou se o scan falhar"
+    falha: "fechar (proposto)"
+
+  - id: F02
+    regra: "Mensagem de commit sem coautoria nem rastro de ferramenta, com última linha AI Generated"
+    texto: regras/commits.md
+    tipo: hook
+    evento: "commit-msg"
+    acao: "reprovar a mensagem que tenha linha de coautoria ou não termine com a linha de atribuição"
+    parametro: "linha de atribuição: AI Generated (valor do ambiente)"
+    falha: "fechar (proposto)"
+
+  - id: F03
+    regra: "Comando de root usa pkexec, nunca sudo"
+    texto: regras/conversation.md
+    tipo: deny
+    alvo: Bash
+    padrao: "sudo *"
+    acao: "negar e orientar a trocar por pkexec"
+    falha: "fechar"
+    status: decidida
+
+  - id: F04
+    regra: "BACKLOG.md ignorado pelo git"
+    texto: regras/backlog.md
+    tipo: check
+    alvo: ".gitignore do repo"
+    padrao: "linha /BACKLOG.md"
+    evento: "criação do repo e antes de commit"
+    falha: "reprovar se a linha faltar"
+
+  - id: F05
+    regra: "Segredo em claro não é escrito em arquivo do repo"
+    texto: regras/secrets.md
+    tipo: deny
+    alvo: "Write|Edit"
+    padrao:
+      - "**/.env"
+      - "**/*.pem"
+      - "**/*.key"
+    excecao: "arquivos de modelo (sufixo .example) ficam de fora"
+    acao: "negar e orientar o canal seguro"
+    falha: "fechar"
+    status: decidida
+
+  - id: F06
+    regra: "Imagem de container com tag exata de versão, nunca latest nem tag só de major"
+    texto: regras/infra.md
+    tipo: check
+    alvo: "arquivos de compose"
+    padrao: "campo image sem tag exata, com latest, release ou tag só de major"
+    falha: "reprovar"
+
+  - id: F07
+    regra: "Ler o harness antes de escrever"
+    texto: harness/CLAUDE.md
+    tipo: lembrete
+    alvo: "Write|Edit|NotebookEdit"
+    acao: "hoje: negar a escrita até o harness ser lido na sessão; decisão: fica como lembrete (ver ORIGEM.md, D1)"
+    falha: "abrir (erro não bloqueia)"
