@@ -65,6 +65,8 @@
 - A superfície (rede, processo, porta, dependência) é a mínima possível.
 - Superfície aceita conta como o mínimo possível: aceitar é decisão consciente, e dita.
 - O que não foi aceito explicitamente não entra.
+- Diminuir a superfície de ataque é contínuo: o que deixou de ser necessário sai. Isso inclui a limpeza, manual e automática, do que sobra do trabalho (worktrees, branches, processos, arquivos temporários, acessos e credenciais não usados).
+- A limpeza respeita as regras do ambiente: antes de remover, olha o alvo; nada com trabalho não integrado ou não guardado é apagado sem a pessoa decidir.
 
 ## 10. Pouco e robusto
 
