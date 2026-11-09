@@ -14,7 +14,7 @@ versao: 1
 itens:
   - id: F01
     regra: "Scan de segredos antes de todo commit"
-    texto: regras/commits.md
+    texto: HARNESS.md
     tipo: hook
     evento: "antes de commit"
     acao: "rodar o scan de segredos do repo e bloquear se achar algo ou se o scan falhar"
@@ -22,7 +22,7 @@ itens:
 
   - id: F02
     regra: "Mensagem de commit sem coautoria nem rastro de ferramenta, com última linha AI Generated"
-    texto: regras/commits.md
+    texto: HARNESS.md
     tipo: hook
     evento: "commit-msg"
     acao: "reprovar a mensagem que tenha linha de coautoria ou não termine com a linha de atribuição"
@@ -31,17 +31,17 @@ itens:
 
   - id: F03
     regra: "Comando de root usa pkexec, nunca sudo"
-    texto: regras/conversation.md
+    texto: HARNESS.md
     tipo: deny
     alvo: Bash
     padrao: "sudo *"
-    acao: "negar e orientar a trocar por pkexec"
+    acao: "negar: a sessão pede ao ambiente, que abre a tela separada e usa pkexec"
     falha: "fechar"
     status: decidida
 
   - id: F04
     regra: "BACKLOG.md ignorado pelo git"
-    texto: regras/backlog.md
+    texto: HARNESS.md
     tipo: check
     alvo: ".gitignore do repo"
     padrao: "linha /BACKLOG.md"
@@ -50,7 +50,7 @@ itens:
 
   - id: F05
     regra: "Segredo em claro não é escrito em arquivo do repo"
-    texto: regras/secrets.md
+    texto: HARNESS.md
     tipo: deny
     alvo: "Write|Edit"
     padrao:
@@ -64,7 +64,7 @@ itens:
 
   - id: F06
     regra: "Imagem de container com tag exata de versão, nunca latest nem tag só de major"
-    texto: regras/infra.md
+    texto: HARNESS.md
     tipo: check
     alvo: "arquivos de compose"
     padrao: "campo image sem tag exata, com latest, release ou tag só de major"
@@ -72,7 +72,7 @@ itens:
 
   - id: F07
     regra: "Ler o harness antes de escrever"
-    texto: harness/CLAUDE.md
+    texto: HARNESS.md
     tipo: lembrete
     alvo: "Write|Edit|NotebookEdit"
     acao: "hoje: negar a escrita até o harness ser lido na sessão; decisão: fica como lembrete (ver ORIGEM.md, D1)"
@@ -80,7 +80,7 @@ itens:
 
   - id: F08
     regra: "Chave de acesso nunca vive dentro do ambiente"
-    texto: regras/secrets.md
+    texto: HARNESS.md
     tipo: check
     alvo: "settings geradas ou gerenciadas pelo workspace, e arquivos do repo"
     padrao:

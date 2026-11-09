@@ -7,4 +7,10 @@ Autonomia Tecnológica: o que é o ambiente, o que une o AT, o Produtividade e o
 e as premissas que valem para todos eles. Ele não tem código; é o texto que os outros repositórios
 citam, e que vale sobre eles. Ele é escrito para LLMs, e humanos também podem lê-lo.
 
+**Definição do projeto:** um ambiente de trabalho para sentir que se tem o controle da LLM, com
+interações mais significativas sem abrir mão da segurança.
+
 O texto: [`docs/pt_BR/filosofia.md`](docs/pt_BR/filosofia.md).
+
+O harness que governa o trabalho é [`harness/HARNESS.md`](harness/HARNESS.md). O `CLAUDE.md` e a
+configuração do OpenCode só apontam para ele; as regras não se duplicam.

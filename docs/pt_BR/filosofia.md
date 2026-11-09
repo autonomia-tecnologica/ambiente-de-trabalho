@@ -34,6 +34,14 @@
 - Menor privilégio para pessoa, programa e agente; rastro de toda ação; segredo nunca em claro.
 - Comando privilegiado (root, sudo, instalação, alteração de sistema) nunca é executado por LLM por conta própria: o agente diz que pode executar, mostra o comando e espera a confirmação explícita da pessoa. Só então roda, pedindo a senha administrativa pelo mecanismo do sistema (no Linux, `pkexec`), de modo que a pessoa saiba o que está autorizando na máquina dela.
 - O que não se mede se declara, em vez de virar promessa.
+- **Negado por padrão.** O ambiente declara os repositórios e as pastas de dados livres; o resto é fechado. Não existe permissão implícita.
+- **Uma regra, os dois harnesses.** Claude e OpenCode usam a mesma política central e a mesma decisão. Só entra configuração que dê para centralizar; o que não centraliza não entra.
+- **Viés de segurança.** Segurança é o viés principal do ambiente: o ambiente de trabalho e o ai-tmux-workspace se propõem a ser o controlador da segurança do ambiente de trabalho — com ou sem IA, por tipo de arquivo, por comando do sistema operacional ou com o AT como ponte.
+- **Regra explícita e autoral.** As regras de segurança ficam sempre explícitas no ambiente porque o autor é pessoa de segurança. Regras de outras disciplinas (design system, frontend, o que o autor não domina) só entram quando alguém as contribui e o autor as julga boas; o autor põe o que sente que pode contribuir.
+- **Forma de uso, não comando.** A permissão é por capacidade — ler repo, editar repo, ler/escrever git, rodar teste, rede, instalar, administrar, `/tmp`, configuração — e os comandos ficam dentro dela. `git` e `python` soltos não são permissão.
+- **Cada sessão na sua caixa.** A LLM roda com usuário próprio, separado da pessoa, quando a plataforma permitir; onde não permitir (Windows, ambiente corporativo), a caixa é a política do harness, declarada como atrito. A allowlist vale por pasta: sessão aberta num repo só altera aquele repo; a home pode alterar as outras; `/tmp` é a única área global liberada. Auto mode é permitido, mas dentro da caixa; configuração da máquina é da home, não da sessão de repo.
+- **Conversa sim, execução não.** Sessões podem conversar; pedido de execução vindo de outra sessão não roda sem aprovação clara da pessoa, nos dois sentidos (home→repo e repo→home).
+- **Rastro e degraus.** Toda ação deixa rastro; a modelagem de ameaças é contínua e pode ter ponta solta. Tarefa de segurança é implementada em ordem gradual, fechada aos poucos, para que o risco da própria mudança de segurança fique contido: cada degrau é reversível, testado e mantém a autonomia do agente.
 
 ## 5. Dados da pessoa
 

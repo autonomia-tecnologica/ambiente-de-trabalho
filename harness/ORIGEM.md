@@ -2,6 +2,9 @@
 
 Tabela regra de origem → destino. Cada regra das fontes atuais aparece uma vez.
 
+Os caminhos `regras/*.md` e `CLAUDE.md` citados abaixo são históricos: o destino atual de toda
+regra é o `HARNESS.md`; a tabela preserva de onde cada uma veio.
+
 Fontes (rótulos, sem caminho):
 
 - `global`: o CLAUDE.md do usuário, para qualquer repo.
@@ -12,8 +15,8 @@ Fontes (rótulos, sem caminho):
 Situações:
 
 - **mantida**: vai para o harness, com o mesmo sentido (pode estar generalizada).
-- **movida**: vai para outro lugar do harness, ou vira o padrão de entrada (`CLAUDE.md`).
-- **mecanismo**: é como o hook faz valer a regra; não mora aqui (ver `harness/regras/harness.md`).
+- **movida**: vai para outro lugar do harness, ou vira o padrão de entrada (`HARNESS.md`).
+- **mecanismo**: é como o hook faz valer a regra; não mora aqui (ver `HARNESS.md`, seção Harness).
 - **cortada**: sai por ser histórico, já aposentado ou duplicado.
 - **pessoal**: fica fora deste repositório, com quem usa o ambiente.
 
@@ -125,4 +128,7 @@ Situações:
 - **D5. Quem usa é "a pessoa".** Nenhuma regra deste repositório nomeia quem a escreveu nem traz dado pessoal dele.
 - **D6. Itens forçados decididos.** F03 (`sudo` negado, pkexec no lugar) e F05 (segredo em claro fora do repo, com exceção para modelos `.example`) foram confirmados pela pessoa e marcados `status: decidida` em `forcado.yaml`.
 - **D7. Chave de acesso nunca vive dentro do ambiente, decidido pela pessoa.** O workspace pode gerar e gerenciar as settings do agente para a pessoa, exceto as chaves (API, token de provedor): essas nunca moram no ambiente, e as settings só apontam para onde estão. Regra em `regras/secrets.md` e `forcado.yaml` (F08).
-- **D8. Modo automático só em subagente, decidido pela pessoa.** A sessão principal fica sempre em `accept edits`; ação não monitorada roda em subagente delimitado, com escopo fechado. Permissão se concede a um comando concreto por vez, nunca a um guarda-chuva que libera outros comandos (`Bash`, interpretador inteiro). Regra em `regras/agents.md`; resumo em `CLAUDE.md`.
+- **D8. Modo automático só em subagente, decidido pela pessoa.** A sessão principal fica sempre em `accept edits`; ação não monitorada roda em subagente delimitado, com escopo fechado. Permissão se concede a um comando concreto por vez, nunca a um guarda-chuva que libera outros comandos (`Bash`, interpretador inteiro). Regra em `regras/agents.md`; resumo em `CLAUDE.md`. **Substituída por D10.**
+- **D9. Perfil não-Claude sobe com o tool search desligado, por compatibilidade.** Enquanto a ferramenta de harness não for trocada, todo perfil do workspace cujo nome não seja `claude` sobe com `ENABLE_TOOL_SEARCH=false`. O Claude Code grava o estado do tool search no transcript (`tool_addition` com `tool_definition`), e endpoints compatíveis com a Anthropic de outros provedores recusam esse variant (422 em `messages[1].content`), quebrando o `--continue`; desligado por padrão, a sessão nova já nasce compatível. Não é barreira de segurança e não muda o perfil `claude`. A decisão é revista quando o at-harness substituir a ferramenta de harness ou quando o provedor aceitar os blocos.
+- **D10. Modo de permissão: `acceptEdits` na primeira vez, último modo salvo por perfil, `auto` só no Claude e nunca aplicado na troca (substitui D8).** A primeira abertura de um perfil usa `acceptEdits`. Se a pessoa mudar o modo, o workspace salva o último modo daquele perfil e o reaplica nas aberturas seguintes do mesmo perfil. Na troca de perfil, o modo salvo não é aplicado de primeira: o perfil novo abre em `acceptEdits`, e a pessoa decide o resto. Perfil de API externa nunca recebe o modo salvo de outro perfil na primeira abertura. `auto` só existe no perfil `claude`, porque o classifier é um modelo Claude; em perfil não-Claude ele nunca é aplicado, nem quando veio salvo do `claude`. `bypassPermissions` só por escolha da pessoa, com o aviso de segurança; `deny` vale em todo modo e o sandbox delimita o Bash. No bypass, `allow` não tem efeito. Fora do bypass, permissão continua sendo de um comando concreto, nunca de um guarda-chuva (`Bash`, interpretador inteiro). Regra em `regras/agents.md`; resumo em `CLAUDE.md`. **Substituída por D11 na parte de modo e permissão; o resto continua válido enquanto não houver caixa de SO.**
+- **D11. Isolamento por sessão e política única de capacidades, decidido pela pessoa (substitui D10 na parte de modo e permissão).** Tudo negado por padrão; a LLM roda com usuário próprio, separado da pessoa; sessão de repo só altera o próprio repo e `/tmp`; a home altera as outras; configuração da máquina é da home; permissão por forma de uso (capacidade), nunca por comando solto; a mesma decisão no Claude e no OpenCode; `auto` só dentro da caixa de SO; pedido de execução vindo de outra sessão exige aprovação clara da pessoa. Regra em `regras/isolation.md` e `docs/pt_BR/filosofia.md` (tópico 4); implementação no `ai-tmux-workspace`, itens 63–66. Enquanto não houver caixa de SO, a política de harness é atrito declarado, não garantia.
