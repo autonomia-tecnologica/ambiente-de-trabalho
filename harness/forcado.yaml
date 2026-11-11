@@ -89,3 +89,12 @@ itens:
     evento: "antes de gravar settings e antes de commit"
     falha: "reprovar se houver valor literal de chave (apontar para o cofre em vez disso)"
     status: decidida
+
+  - id: F09
+    regra: "Todo efeito tem um dono único; código novo não abre um segundo dono"
+    texto: "harness adicional do projeto (harness/choke-point.md)"
+    tipo: check
+    alvo: "tests/test_architecture.py (allowlist por efeito)"
+    acao: "reprovar arquivo novo que emita o efeito fora da allowlist; a lista só encolhe"
+    falha: "reprovar"
+    status: decidida
